@@ -1,2 +1,12 @@
 ---
-# tasks file for base-config
+# tasks file for common configuration accross all 3-tier nodes
+
+- name: copy yum repo file to all 3-tier hosts
+  template: 
+    src: {{ COMMON_REPO_FILE }}
+    dest: /etc/yum.repos.d/{{ COMMON_REPO_FILE }}
+    mode: 0644
+    
+- name: replacing hostname
+  hostname: 
+    name: {{ inventory_hostname }}
